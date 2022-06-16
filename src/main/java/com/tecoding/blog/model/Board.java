@@ -54,7 +54,7 @@ public class Board {
 	// DB 에 컬럼을 만들지 마시오 
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) 
 	private List<Reply> reply; 
-		
+	
 		
 	@CreationTimestamp
 	private Timestamp createDate;
