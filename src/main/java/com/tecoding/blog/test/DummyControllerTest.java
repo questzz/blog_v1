@@ -1,4 +1,4 @@
-package com.tecoding.blog.controller;
+package com.tecoding.blog.test;
 
 import java.util.List;
 
