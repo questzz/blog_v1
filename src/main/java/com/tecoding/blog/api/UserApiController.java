@@ -17,7 +17,11 @@ import com.tecoding.blog.service.UserService;
 public class UserApiController {
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
+	
+	@Autowired
+	private HttpSession httpSession; 
+	
 	
 	@PostMapping("/api/user")
 	public ResponseDto<Integer> save(@RequestBody User user) {
@@ -31,13 +35,13 @@ public class UserApiController {
 	// /blog/api/user/login 
 	
 	@PostMapping("/api/user/login")
-	public ResponseDto<Integer> login(@RequestBody User user, HttpSession session){
+	public ResponseDto<Integer> login(@RequestBody User user){
 		System.out.println("loing 호출됨");
 		// 접근 주체 
 		User principal = userService.login(user);
 		// 접근 주체가 정상적으로 username, password 확인! (세션이라는 거대한 메모리에 저장)
 		if(principal != null) {
-			session.setAttribute("principal", principal);
+			httpSession.setAttribute("principal", principal);
 			System.out.println("세션 정보저 저장 되었습니다.");
 		}
 		
