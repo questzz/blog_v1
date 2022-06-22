@@ -8,8 +8,9 @@ import com.tecoding.blog.model.User;
 // Bean으로 등록 될 수 있나요? --> 스프링에서  Ioc 에서 객체를 가지고 있나요? 
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
-	// insert 
-	// select 
-	// update 
-	// delete 
+	// spring JPA 네이밍 전략 
+	// SELECT * FROM user WHERE username = ?1 AND password = ?2;
+	User findByUsernameAndPassword(String username, String password);
+	
+	
 }

@@ -1,9 +1,16 @@
 let index = {
 	
 	init: function() {
+		
 		$("#btn-save").bind("click", () => {
 			this.save();
 		});
+		
+		$("#btn-login").bind("click", () => {
+			this.login();
+		});
+		
+		
 	},
 	
 	save: function() {
@@ -36,12 +43,40 @@ let index = {
 			console.log(error)
 			alert("회원가입에 실패 하였습니다.");
 		});
+	}, 
+	
+	login: function() {
 		
+		let data = {
+			username: $("#username").val(), 
+			password: $("#password").val()
+		}
 		
-		
+		// ajax 호출 
+		$.ajax({
+			// 회원 로그인 요청 
+			type: "POST",
+			url: "/blog/api/user/login",
+			data: JSON.stringify(data), 
+			contentType: "application/json; charset=utf-8", 
+			dataType: "json" 
+		}).done(function(data, textStatus, xhr) {
+			alert("로그인이 완료 되었습니다.")
+			location.href = "/blog"
+			console.log(data);
+		}).fail(function(error) {
+			alert("로그인에 실패 했습니다.")
+			console.log(error);
+		});
 		
 	}
 	
 }
 
 index.init(); 
+
+
+
+
+
+

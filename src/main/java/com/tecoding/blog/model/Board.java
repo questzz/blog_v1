@@ -52,7 +52,7 @@ public class Board {
 	// mappedBy = "board" board는 reply 테이블에 필드 이름이다. 
 	// mappedBy 는 연관 관계에 주인이 아니다 (FK)  
 	// DB 에 컬럼을 만들지 마시오 
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) 
+	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY) 
 	private List<Reply> reply; 
 	
 		

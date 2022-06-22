@@ -1,4 +1,4 @@
-package com.tecoding.blog.model;
+package com.tecoding.blog.dto;
 
 import java.util.List;
 
