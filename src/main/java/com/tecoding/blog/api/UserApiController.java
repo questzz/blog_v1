@@ -44,9 +44,10 @@ public class UserApiController {
 			httpSession.setAttribute("principal", principal);
 			System.out.println("세션 정보저 저장 되었습니다.");
 		}
-		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
+	
+	
 	
 	
 }
