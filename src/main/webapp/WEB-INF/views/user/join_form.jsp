@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
 <div class="container">
-	<form action="#">
+	<form>
 	  <div class="form-group">
 	    <label for="username">username:</label>
 	    <input type="text" class="form-control" placeholder="Enter username" id="username" />
@@ -23,7 +23,7 @@
 </div>
 <br/>
 
-<script src="/blog/js/user.js"></script>
+<script src="/js/user.js"></script>
 
 <%@ include file="../layout/footer.jsp" %>
 
