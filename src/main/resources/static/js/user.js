@@ -6,10 +6,9 @@ let index = {
 			this.save();
 		});
 		
-		$("#btn-login").bind("click", () => {
-			this.login();
+		$("#btn-update").bind("click", () => {
+			this.update();
 		});
-		
 		
 	},
 	
@@ -45,31 +44,31 @@ let index = {
 		});
 	}, 
 	
-	login: function() {
+	update: function() {
 		
 		let data = {
-			username: $("#username").val(), 
-			password: $("#password").val()
+			id: $("#id").val(),
+			password: $("#password").val(),
+			email: $("#email").val()
 		}
 		
-		// ajax 호출 
 		$.ajax({
-			// 회원 로그인 요청 
-			type: "POST",
-			url: "/api/user/login",
+			type: "PUT", 
+			url: "/user",
 			data: JSON.stringify(data), 
-			contentType: "application/json; charset=utf-8", 
-			dataType: "json" 
-		}).done(function(data, textStatus, xhr) {
-			alert("로그인이 완료 되었습니다.")
-			location.href = "/"
-			console.log(data);
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(data) {
+			if(data.status) {
+				alert("회원정보 수정이 완료 되었습니다.")
+				location.href = "/";
+			}
+						
 		}).fail(function(error) {
-			alert("로그인에 실패 했습니다.")
-			console.log(error);
+			alert("회원정보 수정이 실패하였습니다.")
 		});
 		
-	}
+	} // end of update 
 	
 }
 

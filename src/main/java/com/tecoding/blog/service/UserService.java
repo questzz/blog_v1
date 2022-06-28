@@ -35,6 +35,18 @@ public class UserService {
 		return 1; 
 	}
 	
+	@Transactional
+	public void updateUser(User user) {
+		User userEntity = userRepository.findById(user.getId())
+				.orElseThrow(() -> {
+					return new IllegalArgumentException("회원 정보가 없습니다.");
+				});
+		String rawPasswrod = user.getPassword(); 
+		String hashPassword = encoder.encode(rawPasswrod);
+		userEntity.setPassword(hashPassword);
+		userEntity.setEmail(user.getEmail());
+	}
+	
 //	@Transactional(readOnly = true)
 //	public User login(User user) {
 //		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
