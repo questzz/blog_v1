@@ -26,7 +26,6 @@ public class UserApiController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
-
 	@PutMapping("/user")
 	public ResponseDto<Integer> update(@RequestBody User user) {
 		userService.updateUser(user);
