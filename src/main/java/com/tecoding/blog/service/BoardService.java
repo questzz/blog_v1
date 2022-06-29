@@ -7,14 +7,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tecoding.blog.model.Board;
+import com.tecoding.blog.model.Reply;
 import com.tecoding.blog.model.User;
 import com.tecoding.blog.repository.BoardRepository;
+import com.tecoding.blog.repository.ReplyRepository;
 
 @Service
 public class BoardService {
 	
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private ReplyRepository replyRepository;
+	
 	
 	@Transactional
 	public void write(Board board, User user) { // title, content 
@@ -51,6 +57,17 @@ public class BoardService {
 		boardEntity.setTitle(board.getTitle());
 		boardEntity.setContent(board.getContent());
 		// 더티체킹 
+	}
+	
+	// boardService.writeReply(pricipalDetail.getUser(), boardId, reply);
+	@Transactional
+	public void writeReply(User user, int boardId, Reply requestReply) {
+		Board boardEntity =  boardRepository.findById(boardId).orElseThrow(() -> {
+			return new IllegalArgumentException("댓글 쓰기 실패 : 게시글이 존재 하지 않아요~");
+		});
+		requestReply.setUser(user);
+		requestReply.setBoard(boardEntity);
+		replyRepository.save(requestReply);
 	}
 	
 }

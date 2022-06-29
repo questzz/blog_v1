@@ -29,7 +29,7 @@
 	<div class="card">
 		<div>
 			<div class="card-body"><textarea rows="1" class="form-control" id="reply-content" ></textarea></div>
-			<div class="card-footer"><button type="button" class="btn btn-primary" id="reply-save">등록</button></div>
+			<div class="card-footer"><button type="button" class="btn btn-primary" id="btn-reply-save">등록</button></div>
 		</div>
 	</div>
 	<br/>
@@ -44,6 +44,7 @@
 				<div class="d-flex">
 					<div>작성자 : ${reply.user.username}&nbsp;&nbsp;</div>  
 					<button class="badge badge-danger">삭제</button>
+					
 				</div>
 			</li>
 		</c:forEach>
