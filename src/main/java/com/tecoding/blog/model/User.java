@@ -27,7 +27,7 @@ public class User {
 	@Id // Primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에 연결된 DB의 넘버링 전략을 따라가겠다.
 	private int id;
-	@Column(nullable = false, length = 30, unique = true)
+	@Column(nullable = false, length = 100, unique = true)
 	private String username;
 	@Column(nullable = false, length = 100)
 	private String password;
@@ -39,6 +39,8 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private RoleType role; // Enum 타입 사용 권장 : admin, user, manager
 
+	private String oauth; // kakao, google, naver  ... 
+	
 	@CreationTimestamp // 시간이 자동으로 입력 된다.
 	private Timestamp createDate;
 }
