@@ -4,6 +4,7 @@
 <%@ include file="../layout/header.jsp" %>
 
 <div class="container">
+	<input type="hidden" value="${pricipal.user.id}" id="pricipal--id">
 	<button class="btn bg-secondary" onclick="history.back();">돌아가기</button>
 	<c:if test="${board.userId.id == principal.user.id}">
 		<a href="/board/${board.id}/update_form" class="btn btn-warning" >수정</a>
@@ -43,7 +44,10 @@
 				<div>${reply.content}</div>
 				<div class="d-flex">
 					<div>작성자 : ${reply.user.username}&nbsp;&nbsp;</div>  
-					<button class="badge badge-danger">삭제</button>
+					<c:if test="${reply.user.id eq principal.user.id }">
+						<button class="badge badge-danger" onclick="index.replyDelete(${board.id}, ${reply.id});">삭제</button>
+					</c:if>
+					
 				</div>
 			</li>
 		</c:forEach>

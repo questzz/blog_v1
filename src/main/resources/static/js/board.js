@@ -111,23 +111,42 @@ let index = {
 		})
 		.done(function(response) {
 			if(response.status) {
-				//response - int status, T data
-				console.log(response.data)
 				addReplyElement(response.data);
 			} 
 		})
 		.fail(function(error) {
 			alert("댓글 작성에 실패하였습니다.");
 		});
-	} 
+	}, // end  of replySave
+	
+	replyDelete: function(boardId, replyId) {
+		$.ajax({
+			type: "DELETE", 
+			url: `/api/board/${boardId}/reply/${replyId}`,
+			dataType: "json"
+		}).done(function(response) {
+			console.log(response);
+			alert("댓글 삭제 성공");
+			location.href = `/board/${boardId}`;
+		}).fail(function(error) {
+			console.log(error);
+			alert("댓글 삭제 실패");
+		});
+	}
+	
+	 
 }
 
 function addReplyElement(reply) {
+	let principalId = $("#pricipal--id").val();
 	let childElement = `<li class="list-group-item d-flex justify-content-between" id="reply--${reply.id}" >
 				<div>${reply.content}</div>
 				<div class="d-flex">
 					<div>작성자 : ${reply.user.username}&nbsp;&nbsp;</div>  
-					<button class="badge badge-danger">삭제</button>
+					<c:if test="${reply.user.id == principalId }">
+						<button class="badge badge-danger" onclick="index.replyDelete(${reply.board.id}, ${reply.id});">삭제</button>
+					</c:if>
+					
 				</div>
 			</li>`;
 	$("#reply--box").prepend(childElement);

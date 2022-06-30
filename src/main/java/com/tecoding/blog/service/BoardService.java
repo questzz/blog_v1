@@ -73,6 +73,11 @@ public class BoardService {
 		return replyEntity;
 	}
 	
+	@Transactional
+	public void deleteReplyById(int replyId) {
+		replyRepository.deleteById(replyId);
+	}
+	
 }
 
 
