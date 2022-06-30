@@ -37,13 +37,10 @@ public class DummyControllerTest {
 	// 페이징 처리
 	// http://localhost:9090/blog/dummy/user?page=0
 	@GetMapping("/dummy/user")
-	public Page<User> pageList(@PageableDefault(size = 2, sort = "id", direction = Direction.DESC) Pageable pageble) {
-
+	public Page<User> pageList(@PageableDefault(size = 1, sort = "id", direction = Direction.DESC) Pageable pageble) {
 //		Page<User> pageUser = userRepository.findAll(pageble);
-
 //		Page page =  userRepository.findAll(pageble);
 //		List<User> user =  page.getContent();
-
 		Page<User> pageUser = userRepository.findAll(pageble);
 		return pageUser;
 	}
