@@ -37,14 +37,22 @@ public class UserService {
 	
 	@Transactional
 	public void updateUser(User user) {
+		
+		// 카카오가 수정이 들어 오면 무시 
+		// 기존 수정이 들어오면 처리 
+		
+		
 		User userEntity = userRepository.findById(user.getId())
 				.orElseThrow(() -> {
 					return new IllegalArgumentException("회원 정보가 없습니다.");
 				});
-		String rawPasswrod = user.getPassword(); 
-		String hashPassword = encoder.encode(rawPasswrod);
-		userEntity.setPassword(hashPassword);
-		userEntity.setEmail(user.getEmail());
+		
+		if(userEntity.getOauth() == null || userEntity.getOauth() == "") {
+			String rawPasswrod = user.getPassword(); 
+			String hashPassword = encoder.encode(rawPasswrod);
+			userEntity.setPassword(hashPassword);
+			userEntity.setEmail(user.getEmail());
+		}
 	}
 	
 	@Transactional(readOnly = true)
