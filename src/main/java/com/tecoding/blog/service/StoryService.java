@@ -32,30 +32,21 @@ public class StoryService {
 	}
 	
 	
-	//storyService.imgeUpload(fileDto, pricipalDetail);
 	@Transactional
 	public void imgeUpload(RequestFileDto fileDto, User user) {
 		
-		// 파일 업로드 기능 (해당 서버에 바이너리 파일 생성하고 성공하면 DB 저장)
 		UUID uuid = UUID.randomUUID();
-		String imageFileName = uuid + "_" + fileDto.getFile().getOriginalFilename();
-		System.out.println("파일명 : " + imageFileName);
-		
-		// 서버 컴퓨터의 Path 를 가지고 와야 한다.(경로) 
-		Path imageFilePath = Paths.get(uploadFolder + imageFileName);
-		System.out.println("전체 파일 경로 + 파일명 : " + imageFilePath);
+		String imageFileName = uuid + "_" + "story";
+		String newFileName = (imageFileName.trim()).replaceAll("\\s", ""); 
+		Path imageFilePath = Paths.get(uploadFolder + newFileName);
 		
 		try {
 			Files.write(imageFilePath, fileDto.getFile().getBytes());
 			// DB 저장 
-			Image imageEntity =  fileDto.toEntity(imageFileName, user);
+			Image imageEntity =  fileDto.toEntity(newFileName, user);
 			storyRepository.save(imageEntity);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 }
-
-
-
-
