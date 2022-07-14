@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp" %>
-
+<br/>
 <div class="container">
 	<input type="hidden" value="${pricipal.user.id}" id="pricipal--id">
 	<button class="btn bg-secondary" onclick="history.back();">돌아가기</button>

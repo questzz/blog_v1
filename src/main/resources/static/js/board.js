@@ -21,6 +21,13 @@ let index = {
 	
 	save: function() {
 		
+		// csrf 활성화 후에는 헤더에 token 값을 넣어야 정상 동작 된다. 
+		let token = $("meta[name='_csrf']").attr("content");
+		let header = $("meta[name='_csrf_header']").attr("content");
+		
+		console.log("token : " + token);
+		console.log("header : " + header);
+		
 		// 데이터 가져 오기 
 		let data = {
 			title: xSSCheck($("#title").val(), 1), 
@@ -30,6 +37,10 @@ let index = {
 		console.log(data);
 		
 		$.ajax({
+			beforeSend : function(xhr) {
+				console.log("xhr : " + xhr)
+				xhr.setRequestHeader(header, token)				
+			},
 			type: "POST",
 			url: "/api/board", 
 			data: JSON.stringify(data),
@@ -76,6 +87,10 @@ let index = {
 		}		
 		
 		$.ajax({
+			beforeSend : function(xhr) {
+				console.log("xhr : " + xhr)
+				xhr.setRequestHeader(header, token)				
+			},
 			type: "PUT", 
 			url: "/api/board/" + boardId, 
 			data: JSON.stringify(data), 
